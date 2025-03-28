@@ -8,6 +8,8 @@ namespace LibraryManagement.Domain.Interface
 
         Task<Book> AddBook(Book book);
 
+        Task<Book> GetBookById(int id);
+
 
     }
 }

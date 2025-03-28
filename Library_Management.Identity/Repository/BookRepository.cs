@@ -28,5 +28,10 @@ namespace LibraryManagement.Infrastructure.Repository
             await _appDbContext.SaveChangesAsync();
             return book;
         }
+        public async Task<Book> GetBookById(int id)
+        {
+            var books = await _appDbContext.books.FirstOrDefaultAsync(x => x.id == id);
+            return books;
+        }
     }
 }

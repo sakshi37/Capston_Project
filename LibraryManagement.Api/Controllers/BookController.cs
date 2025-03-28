@@ -19,11 +19,6 @@ namespace LibraryManagement.Api.Controllers
         public async Task<IActionResult> GetAllBook()
         {
             var allBooks = await _dbBookService.GetAllBooks();
-            if (allBooks == null)
-            {
-                Console.WriteLine("Data could not found");
-
-            }
 
             return Ok(allBooks);
         }
@@ -33,6 +28,12 @@ namespace LibraryManagement.Api.Controllers
         {
             var bookAdded = await _dbBookService.AddBook(book);
             return Ok(bookAdded);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetBookByID(int id)
+        {
+            var book = await _dbBookService.GetBookById(id);
+            return Ok(book);
         }
     }
 }
