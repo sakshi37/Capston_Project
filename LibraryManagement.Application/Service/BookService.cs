@@ -26,6 +26,10 @@ namespace LibraryManagement.Application.Service
             return allBook;
         }
 
-
+        public async Task<Book> GetBookById(int id)
+        {
+            var book = await _dbBookRepository.GetBookById(id);
+            return book;
+        }
     }
 }

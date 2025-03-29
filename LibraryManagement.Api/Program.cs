@@ -7,6 +7,7 @@ using LibraryManagement.Identity.Model;
 using LibraryManagement.Infrastructure.Context;
 using LibraryManagement.Infrastructure.Repository;
 using LibraryManagement.Infrastucture.Context;
+using LibraryManagement.Infrastucture.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,6 +39,8 @@ namespace LibraryManagement.Api
 
             builder.Services.AddScoped<IBookService, BookService>();
             builder.Services.AddScoped<IBookRepository, BookRepository>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
 
 
             builder.Services.AddControllersWithViews();

@@ -6,6 +6,6 @@ namespace LibraryManagement.Application.IService
     {
         Task<IEnumerable<Book>> GetAllBooks();
         Task<Book> AddBook(Book book);
-        ask<Book> GetBookById(int id);
+        Task<Book> GetBookById(int id);
     }
 }
