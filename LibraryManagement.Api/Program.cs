@@ -3,8 +3,7 @@
 using LibraryManagement.Application.IService;
 using LibraryManagement.Application.Service;
 using LibraryManagement.Domain.Interface;
-using LibraryManagement.Identity.Model;
-using LibraryManagement.Infrastructure.Context;
+using LibraryManagement.Domain.Models;
 using LibraryManagement.Infrastructure.Repository;
 using LibraryManagement.Infrastucture.Context;
 using LibraryManagement.Infrastucture.Repository;
@@ -27,10 +26,6 @@ namespace LibraryManagement.Api
                 ServiceLifetime.Scoped
                 );
 
-            builder.Services.AddDbContext<AppDbContext>(options =>
-                options.UseSqlServer(connectionString),
-                ServiceLifetime.Scoped
-                );
 
             builder.Services
             .AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -47,6 +42,7 @@ namespace LibraryManagement.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

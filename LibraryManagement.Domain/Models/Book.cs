@@ -1,24 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryManagement.Domain.Models
 {
     public class Book
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public string title { get; set; }
+        public string Title { get; set; }
         [Required]
-        public string description { get; set; }
+        public string Description { get; set; }
         [Required]
-        public DateTime publishedDate { get; set; }
+        public DateTime PublishedDate { get; set; }
         [Required]
-        public decimal price { get; set; }
+        public decimal Price { get; set; }
+        [Required]
+        public int AuthorId { get; set; }
 
-        [ForeignKey("author_id")]
-        public int authorId { get; set; }
+
+
         public virtual Author Author { get; set; }
+
+        public virtual ICollection<Loan> Loans { get; set; }
+        public virtual ICollection<BookCategory> BookCategories { get; set; }
 
     }
 }

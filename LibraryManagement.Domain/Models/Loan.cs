@@ -2,16 +2,28 @@
 
 namespace LibraryManagement.Domain.Models
 {
-    internal class Loan
+    public class Loan
     {
         [Key]
-        public int loan_id { get; set; }
+        public int Id { get; set; }
         [Required]
-        public DateTime start_date { get; set; }
+        public DateTime StartDate { get; set; }
         [Required]
-        public DateTime end_date { get; set; }
+        public DateTime EndDate { get; set; }
         [Required]
-        public int borrowed_at_price { get; set; }
+        public int BorrowedAtPrice { get; set; }
+        [Required]
+        public bool IsReturn { get; set; }
+        [Required]
+        public int BookId { get; set; }
+        [Required]
+        public string UserId { get; set; }
+
+
+        public virtual ApplicationUser User { get; set; }
+        public virtual Payment Payment { get; set; }
+        public virtual Book Book { get; set; }
+
 
 
     }

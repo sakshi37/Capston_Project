@@ -8,9 +8,9 @@ namespace LibraryManagement.Infrastructure.Repository
     public class BookRepository : IBookRepository
 
     {
-        readonly AppDbContext _appDbContext;
+        readonly ApplicationDbContext _appDbContext;
 
-        public BookRepository(AppDbContext appDbContext)
+        public BookRepository(ApplicationDbContext appDbContext)
         {
 
             _appDbContext = appDbContext;
@@ -30,7 +30,7 @@ namespace LibraryManagement.Infrastructure.Repository
         }
         public async Task<Book> GetBookById(int id)
         {
-            var books = await _appDbContext.books.FirstOrDefaultAsync(x => x.id == id);
+            var books = await _appDbContext.books.FirstOrDefaultAsync(x => x.Id == id);
             return books;
         }
     }

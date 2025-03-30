@@ -5,11 +5,19 @@ namespace LibraryManagement.Domain.Models
     public class Payment
     {
         [Key]
-        public int payment_id { get; set; }
+        public int PaymentId { get; set; }
         [Required]
-        public int paid_amount { get; set; }
+        public int PaidAmount { get; set; }
         [Required]
-        public int returned_at_date { get; set; }
+        public int ReturnedAtDate { get; set; }
+        [Required]
+        public int LoanId { get; set; }
+        [Required]
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
+        public virtual Loan Loan { get; set; }
+
 
 
     }

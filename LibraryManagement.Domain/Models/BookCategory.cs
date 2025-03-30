@@ -1,16 +1,17 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryManagement.Domain.Models
 {
-    internal class BookCategory
+    public class BookCategory
     {
+        [Key]
+        public int Id { get; set; }
         [Required]
-        public int category_id { get; set; }
+        public int CategoryId { get; set; }
         [Required]
-        public int book_id { get; set; }
+        public int BookId { get; set; }
 
-        [ForeignKey("book_id")]
-        public Book book { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual Book Book { get; set; }
     }
 }
