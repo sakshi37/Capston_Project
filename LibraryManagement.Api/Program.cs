@@ -5,6 +5,7 @@ using LibraryManagement.Domain.Interface;
 using LibraryManagement.Domain.Models;
 using LibraryManagement.Infrastructure.Repository;
 using LibraryManagement.Infrastucture.Context;
+using LibraryManagement.Infrastucture.Data;
 using LibraryManagement.Infrastucture.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -18,7 +19,7 @@ namespace LibraryManagement.Api
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("LibraryConnString");
@@ -95,6 +96,7 @@ namespace LibraryManagement.Api
             builder.Services.AddAuthorization();
             var app = builder.Build();
 
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -109,6 +111,18 @@ namespace LibraryManagement.Api
 
 
             app.MapControllers();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    await SeedData.InitializeAsync(services);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Database seeding failed: {ex.Message}");
+                }
+            }
 
             app.Run();
         }

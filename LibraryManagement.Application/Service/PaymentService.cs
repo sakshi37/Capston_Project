@@ -1,4 +1,5 @@
 ﻿using LibraryManagement.Application.IService;
+using LibraryManagement.Domain.Interface;
 using LibraryManagement.Domain.Models;
 
 namespace LibraryManagement.Application.Service

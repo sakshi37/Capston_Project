@@ -19,10 +19,10 @@ namespace LibraryManagement.Domain.Models
 
 
 
-        public virtual Author Author { get; set; }
+        public virtual Author? Author { get; set; }
 
-        public virtual ICollection<Loan> Loans { get; set; }
-        public virtual ICollection<BookCategory> BookCategories { get; set; }
+        public virtual ICollection<Loan>? Loans { get; set; }
+        public virtual ICollection<BookCategory>? BookCategories { get; set; }
 
     }
 }
