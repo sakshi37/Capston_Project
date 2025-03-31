@@ -8,9 +8,9 @@ namespace LibraryManagement.Infrastructure.Repository
     public class BookRepository : IBookRepository
 
     {
-        readonly ApplicationDbContext _appDbContext;
+        readonly AppDbContext _appDbContext;
 
-        public BookRepository(ApplicationDbContext appDbContext)
+        public BookRepository(AppDbContext appDbContext)
         {
 
             _appDbContext = appDbContext;

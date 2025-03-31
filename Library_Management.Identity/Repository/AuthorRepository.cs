@@ -7,8 +7,8 @@ namespace LibraryManagement.Infrastucture.Repository
 {
     public class AuthorRepository : IAuthorRepository
     {
-        readonly ApplicationDbContext _appDbCOntext;
-        public AuthorRepository(ApplicationDbContext appDbContext)
+        readonly AppDbContext _appDbCOntext;
+        public AuthorRepository(AppDbContext appDbContext)
         {
             _appDbCOntext = appDbContext;
 

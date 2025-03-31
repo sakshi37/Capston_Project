@@ -11,7 +11,7 @@ namespace LibraryManagement.Domain.Models
         [Required]
         public DateTime EndDate { get; set; }
         [Required]
-        public int BorrowedAtPrice { get; set; }
+        public decimal BorrowedAtPrice { get; set; }
         [Required]
         public bool IsReturn { get; set; }
         [Required]

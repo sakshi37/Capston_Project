@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using LibraryManagement.Api.DTO;
+using LibraryManagement.Api.Jwt;
 using LibraryManagement.Domain.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -55,7 +56,9 @@ namespace LibraryManagement.Api.Controllers
                 return Unauthorized(new { Message = "Invalid email or password." });
 
             }
-            return Ok(new { Message = "Successful" });
+            var accessToken = TokenGenerator.GenrateAccessToken(user);
+            return Ok(new { Message = "Successful", AccessToken = accessToken });
+
         }
     }
 }

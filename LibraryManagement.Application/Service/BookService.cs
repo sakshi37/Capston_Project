@@ -10,6 +10,7 @@ namespace LibraryManagement.Application.Service
         public BookService(IBookRepository IDbBookRepository)
 
         {
+
             _dbBookRepository = IDbBookRepository;
         }
 
@@ -19,6 +20,8 @@ namespace LibraryManagement.Application.Service
             return addedBook;
 
         }
+
+
 
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
