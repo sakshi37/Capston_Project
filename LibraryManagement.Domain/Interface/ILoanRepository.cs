@@ -5,6 +5,8 @@ namespace LibraryManagement.Domain.Interface
     public interface ILoanRepository
     {
         Task<Loan> AddLoan(Loan loan);
-        //Task<Loan> GetLoanByUser(ApplicationUser id);
+        Task<IEnumerable<Loan>> GetLoansByUser(string userId);
+        Task<Loan> GetLoanById(int loanId);
+
     }
 }

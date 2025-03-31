@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagement.Infrastucture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250331064620_borrowedAtPrice")]
-    partial class borrowedAtPrice
+    [Migration("20250331115143_ReturnedAdDate")]
+    partial class ReturnedAdDate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,8 +237,8 @@ namespace LibraryManagement.Infrastucture.Migrations
                     b.Property<int>("PaidAmount")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReturnedAtDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("ReturnedAtDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()

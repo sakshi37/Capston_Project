@@ -29,10 +29,20 @@ namespace LibraryManagement.Application.Service
 
         }
 
-        //public async Task<Loan> GetLoanByUser(string Id)
-        //{
-        //    var user = await _bookService.GetLoanByUser(ApplicationUser Id);
-        //    return user;
-        //}
+        public async Task<Loan> GetLoanById(int loanId)
+        {
+            var loan = await _loanRepository.GetLoanById(loanId);
+            if (loan == null)
+            {
+                throw new Exception("Loan Not found");
+            }
+            return loan;
+        }
+
+        public async Task<IEnumerable<Loan>> GetLoansByUser(string userId)
+        {
+            var loans = await _loanRepository.GetLoansByUser(userId);
+            return loans;
+        }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace LibraryManagement.Infrastucture.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class ReturnedAdDate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -241,7 +241,7 @@ namespace LibraryManagement.Infrastucture.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    BorrowedAtPrice = table.Column<int>(type: "int", nullable: false),
+                    BorrowedAtPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsReturn = table.Column<bool>(type: "bit", nullable: false),
                     BookId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
@@ -270,7 +270,7 @@ namespace LibraryManagement.Infrastucture.Migrations
                     PaymentId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     PaidAmount = table.Column<int>(type: "int", nullable: false),
-                    ReturnedAtDate = table.Column<int>(type: "int", nullable: false),
+                    ReturnedAtDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LoanId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },

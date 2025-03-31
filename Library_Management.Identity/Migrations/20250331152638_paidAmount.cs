@@ -5,14 +5,14 @@
 namespace LibraryManagement.Infrastucture.Migrations
 {
     /// <inheritdoc />
-    public partial class borrowedAtPrice : Migration
+    public partial class paidAmount : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<decimal>(
-                name: "BorrowedAtPrice",
-                table: "loans",
+                name: "PaidAmount",
+                table: "payments",
                 type: "decimal(18,2)",
                 nullable: false,
                 oldClrType: typeof(int),
@@ -23,8 +23,8 @@ namespace LibraryManagement.Infrastucture.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<int>(
-                name: "BorrowedAtPrice",
-                table: "loans",
+                name: "PaidAmount",
+                table: "payments",
                 type: "int",
                 nullable: false,
                 oldClrType: typeof(decimal),

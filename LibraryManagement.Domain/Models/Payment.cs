@@ -7,9 +7,9 @@ namespace LibraryManagement.Domain.Models
         [Key]
         public int PaymentId { get; set; }
         [Required]
-        public int PaidAmount { get; set; }
+        public decimal PaidAmount { get; set; }
         [Required]
-        public int ReturnedAtDate { get; set; }
+        public DateTime ReturnedAtDate { get; set; }
         [Required]
         public int LoanId { get; set; }
         [Required]

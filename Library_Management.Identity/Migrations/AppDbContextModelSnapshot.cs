@@ -4,7 +4,6 @@ using LibraryManagement.Infrastucture.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -12,11 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryManagement.Infrastucture.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250330175941_init")]
-    partial class init
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -198,8 +195,8 @@ namespace LibraryManagement.Infrastucture.Migrations
                     b.Property<int>("BookId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BorrowedAtPrice")
-                        .HasColumnType("int");
+                    b.Property<decimal>("BorrowedAtPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
@@ -234,11 +231,11 @@ namespace LibraryManagement.Infrastucture.Migrations
                     b.Property<int>("LoanId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PaidAmount")
-                        .HasColumnType("int");
+                    b.Property<decimal>("PaidAmount")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("ReturnedAtDate")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("ReturnedAtDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
                         .IsRequired()
