@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LibraryManagement.Domain.Models
 {
@@ -16,6 +17,7 @@ namespace LibraryManagement.Domain.Models
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+        [JsonIgnore]
         public virtual Loan Loan { get; set; }
 
 

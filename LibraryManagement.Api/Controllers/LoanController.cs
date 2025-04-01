@@ -3,12 +3,11 @@ using AutoMapper;
 using LibraryManagement.Api.DTO;
 using LibraryManagement.Application.IService;
 using LibraryManagement.Domain.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagement.Api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class LoanController : ControllerBase

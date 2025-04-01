@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace LibraryManagement.Domain.Models
 {
@@ -21,6 +22,7 @@ namespace LibraryManagement.Domain.Models
 
         public virtual Author? Author { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Loan>? Loans { get; set; }
         public virtual ICollection<BookCategory>? BookCategories { get; set; }
 

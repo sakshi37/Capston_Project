@@ -16,6 +16,9 @@ namespace LibraryManagement.Api.Mapper
             .ForMember(dest => dest.NormalizedUserName, opt => opt.MapFrom(src => src.Email.ToUpper()));
 
             CreateMap<LoanRequestDto, Loan>();
+            CreateMap<PaymentRequestDto, Payment>();
+            CreateMap<AuthorRequestDto, Author>();
+            CreateMap<BookRequestDto, Book>();
 
         }
 

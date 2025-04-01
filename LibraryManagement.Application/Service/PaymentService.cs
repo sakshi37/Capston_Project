@@ -27,7 +27,7 @@ namespace LibraryManagement.Application.Service
 
             var days = (decimal)(endDate - startDate).TotalDays;
             var rate = (decimal)1 / 100;
-            var amount = days * rate;
+            var amount = days * rate * bookPrice;
 
             var total = amount;
 

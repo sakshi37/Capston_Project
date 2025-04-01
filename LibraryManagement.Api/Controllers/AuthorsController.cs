@@ -1,4 +1,6 @@
-﻿using LibraryManagement.Application.IService;
+﻿using AutoMapper;
+using LibraryManagement.Api.DTO;
+using LibraryManagement.Application.IService;
 using LibraryManagement.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,15 +13,18 @@ namespace LibraryManagement.Api.Controllers
     public class AuthorsController : ControllerBase
     {
         readonly IAuthorService _DbContextAuthor;
-        public AuthorsController(IAuthorService DbCOntextAuthorService)
+        readonly IMapper _mapper;
+        public AuthorsController(IAuthorService DbCOntextAuthorService, IMapper mapper)
         {
+            _mapper = mapper;
             _DbContextAuthor = DbCOntextAuthorService;
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAuthor([FromBody] Author author)
+        public async Task<IActionResult> AddAuthor([FromBody] AuthorRequestDto authorDto)
         {
+            var author = _mapper.Map<Author>(authorDto);
             var addedAuthor = await _DbContextAuthor.AddAuthor(author);
             return Ok(addedAuthor);
         }

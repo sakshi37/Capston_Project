@@ -1,4 +1,6 @@
-﻿using LibraryManagement.Application.IService;
+﻿using AutoMapper;
+using LibraryManagement.Api.DTO;
+using LibraryManagement.Application.IService;
 using LibraryManagement.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,9 +11,11 @@ namespace LibraryManagement.Api.Controllers
     public class BooksController : ControllerBase
     {
         readonly IBookService _dbBookService;
-        public BooksController(IBookService DbBookService)
+        readonly IMapper _mapper;
+        public BooksController(IBookService DbBookService, IMapper mapper)
         {
 
+            _mapper = mapper;
             _dbBookService = DbBookService;
         }
 
@@ -24,8 +28,9 @@ namespace LibraryManagement.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBook([FromBody] Book book)
+        public async Task<IActionResult> AddBook([FromBody] BookRequestDto bookDto)
         {
+            var book = _mapper.Map<Book>(bookDto);
             var bookAdded = await _dbBookService.AddBook(book);
             return Ok(bookAdded);
         }
