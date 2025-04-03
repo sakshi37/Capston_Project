@@ -1,9 +1,35 @@
-<p>all-loans works!</p>
-<div *ngFor="let loan of loans">
-  <p>{{ loan.id }}</p>
-  <p>{{ loan.bookId }}</p>
-  <p>{{ loan.borrowedAtPrice }}</p>
-  <p>{{ loan.startDate }}</p>
-  <p>{{ loan.endDate }}</p>
-  <p>{{ loan.isReturn }}</p>
+<div class="container mt-4">
+  <h2 class="text-center text-primary mb-4">Loan History</h2>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>Loan ID</th>
+          <th>Book ID</th>
+          <th>Borrowed Price</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of loans">
+          <td>{{ loan.id }}</td>
+          <td>{{ loan.bookId }}</td>
+          <td>{{ loan.borrowedAtPrice | currency }}</td>
+          <td>{{ loan.startDate | date : "mediumDate" }}</td>
+          <td>{{ loan.endDate | date : "mediumDate" }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="loan.isReturn ? 'bg-success' : 'bg-danger'"
+            >
+              {{ loan.isReturn ? "Returned" : "Pending" }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

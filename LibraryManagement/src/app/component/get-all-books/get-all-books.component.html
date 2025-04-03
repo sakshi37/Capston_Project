@@ -1,14 +1,43 @@
-<div class="row">
-  <div class="col-md-4" *ngFor="let book of books">
-    <div class="card" style="width: 18rem">
-      <img src="book.imageUrl" class="card-img-top" alt="{{ book.title }}" />
-      <div class="card-body">
-        <h5 class="card-title">{{ book.title }}</h5>
-        <p class="card-text">{{ book.description }}</p>
-        <p><strong>Price:</strong> {{ book.price | currency }}</p>
-        <p><strong>Published Date:</strong> {{ book.publishedDate | date }}</p>
-        <a [routerLink]="['/loan', book.id]" class="btn btn-primary">Add</a>
+<div class="container mt-4">
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let book of books">
+      <div class="card shadow-lg border-0 rounded-4 p-3 book-card">
+        <div class="card-body text-white">
+          <h5 class="card-title fw-bold">{{ book.title }}</h5>
+          <p class="card-text">{{ book.description }}</p>
+          <p class="mb-1">
+            <strong>Price:</strong> {{ book.price | currency }}
+          </p>
+          <p class="mb-3">
+            <strong>Published Date:</strong> {{ book.publishedDate | date }}
+          </p>
+          <a
+            [routerLink]="['/loan', book.id]"
+            class="btn btn-light w-100 rounded-3"
+          >
+            <i class="bi bi-cart-plus"></i> Add to Cart
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  /* 🎨 Set one color for all cards */
+  .book-card {
+    background-color: #6b5b95; /* Change this to any color you like */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    color: white;
+  }
+
+  /* 🔥 Hover effect */
+  .book-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-light {
+    font-weight: 600;
+  }
+</style>

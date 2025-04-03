@@ -26,4 +26,13 @@ export class GetAllBooksComponent {
       this.books = data;
     });
   }
+  cardColors: string[] = [
+    '#FF6B6B',
+    '#6B5B95',
+    '#F7CAC9',
+    '#88B04B',
+    '#92A8D1',
+    '#FFCC5C',
+    '#D65076',
+  ];
 }

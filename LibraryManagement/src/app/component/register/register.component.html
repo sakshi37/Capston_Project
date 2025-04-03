@@ -1,47 +1,57 @@
-<div>
-  <h2>Register</h2>
-  <form (submit)="onRegister()">
-    <input
-      type="text"
-      [(ngModel)]="firstName"
-      name="firstName"
-      [ngModelOptions]="{ standalone: true }"
-      placeholder="firstName"
-      required
-    />
-    <input
-      type="text"
-      [(ngModel)]="lastName"
-      name="lastName"
-      [ngModelOptions]="{ standalone: true }"
-      placeholder="lastName"
-      required
-    />
-    <input
-      type="email"
-      [(ngModel)]="email"
-      name="email"
-      [ngModelOptions]="{ standalone: true }"
-      placeholder="Email"
-      required
-    />
-    <input
-      type="password"
-      [(ngModel)]="password"
-      name="password"
-      [ngModelOptions]="{ standalone: true }"
-      placeholder="Password"
-      required
-    />
-    <!-- <input
-      type="password"
-      [(ngModel)]="confirmPassword"
-      name="confirmPassword"
-      [ngModelOptions]="{ standalone: true }"
-      placeholder="Confirm Password"
-      required
-    /> -->
-    <button type="submit">Register</button>
-  </form>
-  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg p-4 rounded-4" style="width: 350px">
+    <div class="card-body text-center">
+      <h2 class="mb-4 text-primary">Register</h2>
+      <form (submit)="onRegister()">
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control rounded-3"
+            [(ngModel)]="firstName"
+            name="firstName"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="First Name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="text"
+            class="form-control rounded-3"
+            [(ngModel)]="lastName"
+            name="lastName"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Last Name"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="email"
+            class="form-control rounded-3"
+            [(ngModel)]="email"
+            name="email"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <input
+            type="password"
+            class="form-control rounded-3"
+            [(ngModel)]="password"
+            name="password"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="Password"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-100 rounded-3">
+          Register
+        </button>
+      </form>
+      <p *ngIf="errorMessage" class="text-danger mt-3">{{ errorMessage }}</p>
+    </div>
+  </div>
 </div>
