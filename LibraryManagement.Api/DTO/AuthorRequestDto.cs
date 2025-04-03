@@ -3,6 +3,6 @@
     public class AuthorRequestDto
     {
 
-        public string Name { get; set; }
+        public string AuthorName { get; set; }
     }
 }

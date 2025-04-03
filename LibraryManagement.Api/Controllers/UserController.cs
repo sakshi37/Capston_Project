@@ -20,7 +20,7 @@ namespace LibraryManagement.Api.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterRequestDto userDto)
+        public async Task<ActionResult<UserRegisterResponseDto>> Register([FromBody] UserRegisterRequestDto userDto)
         {
             if (!ModelState.IsValid)
             {

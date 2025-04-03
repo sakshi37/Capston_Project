@@ -36,8 +36,8 @@ namespace LibraryManagement.Infrastucture.Data
             if (!context.authors.Any())
             {
                 context.authors.AddRange(
-                    new Author { Name = "J.K. Rowling" },
-                    new Author { Name = "George R.R. Martin" }
+                    new Author { AuthorName = "J.K. Rowling" },
+                    new Author { AuthorName = "George R.R. Martin" }
                 );
             }
 
@@ -53,8 +53,8 @@ namespace LibraryManagement.Infrastucture.Data
             // ✅ Seed Books
             if (!context.books.Any())
             {
-                var author1 = context.authors.First(a => a.Name == "J.K. Rowling");
-                var author2 = context.authors.First(a => a.Name == "George R.R. Martin");
+                var author1 = context.authors.First(a => a.AuthorName == "J.K. Rowling");
+                var author2 = context.authors.First(a => a.AuthorName == "George R.R. Martin");
 
                 context.books.AddRange(
                     new Book

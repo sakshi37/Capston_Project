@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-4" *ngFor="let book of books">
+    <div class="card" style="width: 18rem">
+      <img src="book.imageUrl" class="card-img-top" alt="{{ book.title }}" />
+      <div class="card-body">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">{{ book.description }}</p>
+        <p><strong>Price:</strong> {{ book.price | currency }}</p>
+        <p><strong>Published Date:</strong> {{ book.publishedDate | date }}</p>
+        <a [routerLink]="['/loan', book.id]" class="btn btn-primary">Add</a>
+      </div>
+    </div>
+  </div>
+</div>

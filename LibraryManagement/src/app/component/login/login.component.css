@@ -1,0 +1,75 @@
+body {
+  font-family: "Arial", sans-serif;
+  background: linear-gradient(135deg, #f5e1a4, #f0c27b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form-card {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+.form-card h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  color: #555;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Input field style */
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Input field focus style */
+.input-group input:focus {
+  border-color: #f0c27b;
+  box-shadow: 0 0 5px rgba(240, 194, 123, 0.8);
+}
+
+/* Button style */
+.btn {
+  background-color: #f0c27b;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+.btn:hover {
+  background-color: #e1a54a;
+}

@@ -25,7 +25,7 @@ namespace LibraryManagement.Application.Service
             var currentDate = DateTime.Today.Date.AddDays(1).AddTicks(-1);
             var bookPrice = loan.BorrowedAtPrice;
 
-            var days = (decimal)(endDate - startDate).TotalDays;
+            var days = Math.Floor((decimal)(endDate - startDate).TotalDays);
             var rate = (decimal)1 / 100;
             var amount = days * rate * bookPrice;
 
@@ -51,6 +51,18 @@ namespace LibraryManagement.Application.Service
             pay.PaidAmount = total;
             var addPay = await _payRepo.AddPayment(pay);
             return addPay;
+        }
+
+        public async Task<Payment> GetPaymentById(int id)
+        {
+            var payment = await _payRepo.GetPaymentById(id);
+            return payment;
+        }
+
+        public async Task<Payment> UpdatePayment(Payment pay)
+        {
+            var update = await _payRepo.UpdatePayment(pay);
+            return update;
         }
     }
 }

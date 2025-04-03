@@ -1,6 +1,7 @@
 ﻿using LibraryManagement.Domain.Interface;
 using LibraryManagement.Domain.Models;
 using LibraryManagement.Infrastucture.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryManagement.Infrastucture.Repository
 {
@@ -16,6 +17,19 @@ namespace LibraryManagement.Infrastucture.Repository
         {
             await _appDbContext.payments.AddAsync(payment);
             var addedPayment = await _appDbContext.SaveChangesAsync();
+            return payment;
+        }
+
+        public async Task<Payment> GetPaymentById(int id)
+        {
+            var payment = await _appDbContext.payments.FirstOrDefaultAsync(i => i.PaymentId == id);
+            return payment;
+        }
+
+        public async Task<Payment> UpdatePayment(Payment payment)
+        {
+            _appDbContext.payments.Update(payment);
+            var update = await _appDbContext.SaveChangesAsync();
             return payment;
         }
     }

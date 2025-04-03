@@ -103,7 +103,7 @@ namespace LibraryManagement.Infrastucture.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("AuthorName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

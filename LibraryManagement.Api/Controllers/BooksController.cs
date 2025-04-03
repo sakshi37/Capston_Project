@@ -2,10 +2,12 @@
 using LibraryManagement.Api.DTO;
 using LibraryManagement.Application.IService;
 using LibraryManagement.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagement.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -35,12 +37,12 @@ namespace LibraryManagement.Api.Controllers
             return Ok(bookAdded);
         }
 
-        //[HttpGet]
-        //public async Task<IActionResult> GetBookByID(int id)
-        //{
-        //    var book = await _dbBookService.GetBookById(id);
-        //    return Ok(book);
-        //}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetBookByID(int id)
+        {
+            var book = await _dbBookService.GetBookById(id);
+            return Ok(book);
+        }
 
     }
 }

@@ -21,7 +21,7 @@ namespace LibraryManagement.Api.Controllers
             _loanService = iLoanService;
         }
         [HttpPost]
-        public async Task<IActionResult> AddLoan([FromBody] LoanRequestDto loanRequest)
+        public async Task<ActionResult<LoanResponseDto>> AddLoan([FromBody] LoanRequestDto loanRequest)
         {
             var loan = _mapper.Map<Loan>(loanRequest);
             var addedLoan = await _loanService.AddLoan(loan);
@@ -30,7 +30,7 @@ namespace LibraryManagement.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetLoansByUser()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var loan = await _loanService.GetLoansByUser(userId);
             return Ok(loan);
         }
