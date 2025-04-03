@@ -27,8 +27,8 @@ namespace LibraryManagement.Api.Controllers
         public async Task<ActionResult<LoanResponseDto>> AddLoan([FromBody] LoanRequestDto loanRequest)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            var loan = _mapper.Map<Loan>(loanRequest);
-            loan.UserId = userId;
+            var mappedLoan = _mapper.Map<Loan>(loanRequest);
+            mappedLoan.UserId = userId;
 
             var loans = await _loanService.GetLoansByUser(userId);
             if (loans.Count() > 5)
@@ -36,7 +36,13 @@ namespace LibraryManagement.Api.Controllers
               return BadRequest(new { message = $"Cannot borrow more than {MAX_BORROW_COUNT} books" });
             }
 
-            var addedLoan = await _loanService.AddLoan(loan);
+            var alreadyBorrowed = loans.Any(loan => loan.IsReturn == false && loan.BookId == mappedLoan.BookId);
+            if (alreadyBorrowed)
+            {
+                return BadRequest(new { message = $"Cannot borrow already borrowed book" });
+            }
+
+            var addedLoan = await _loanService.AddLoan(mappedLoan);
             return Ok(addedLoan);
         }
         
