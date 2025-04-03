@@ -28,15 +28,18 @@ namespace LibraryManagement.Api.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var mappedLoan = _mapper.Map<Loan>(loanRequest);
+            
             mappedLoan.UserId = userId;
 
             var loans = await _loanService.GetLoansByUser(userId);
-            if (loans.Count() > 5)
+
+            var currentBorrowedCount = loans.Count(loan => loan.IsReturn == false);
+            if (currentBorrowedCount >= MAX_BORROW_COUNT)
             {
               return BadRequest(new { message = $"Cannot borrow more than {MAX_BORROW_COUNT} books" });
             }
 
-            var alreadyBorrowed = loans.Any(loan => loan.IsReturn == false && loan.BookId == mappedLoan.BookId);
+            var alreadyBorrowed = loans.Any(loan => loan.BookId == mappedLoan.BookId && loan.IsReturn == false);
             if (alreadyBorrowed)
             {
                 return BadRequest(new { message = $"Cannot borrow already borrowed book" });

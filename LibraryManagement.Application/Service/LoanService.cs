@@ -44,5 +44,10 @@ namespace LibraryManagement.Application.Service
             var loans = await _loanRepository.GetLoansByUser(userId);
             return loans;
         }
+
+        public async Task Update(int loanId)
+        {
+            await _loanRepository.Update(loanId);
+        }
     }
 }

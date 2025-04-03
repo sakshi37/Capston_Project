@@ -19,12 +19,11 @@ namespace LibraryManagement.Infrastucture.Repository
             await _appContext.loans.AddAsync(loan);
             await _appContext.SaveChangesAsync();
             return loan;
-
         }
 
         public async Task<Loan> GetLoanById(int loanId)
         {
-            var loan = await _appContext.loans.FirstOrDefaultAsync(loan => loan.Id == loanId);
+            var loan = await _appContext.loans.AsNoTracking().FirstOrDefaultAsync(loan => loan.Id == loanId);
             return loan;
         }
 
@@ -34,5 +33,12 @@ namespace LibraryManagement.Infrastucture.Repository
             return loans;
         }
 
+        public async Task Update(int loanId)
+        {
+            var loan = new Loan { Id = loanId, IsReturn = true };
+            _appContext.loans.Attach(loan);
+            _appContext.Entry(loan).Property(l => l.IsReturn).IsModified = true;
+            await _appContext.SaveChangesAsync();
+        }
     }
 }
