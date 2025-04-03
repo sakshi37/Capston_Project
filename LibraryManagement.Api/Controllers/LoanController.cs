@@ -13,6 +13,7 @@ namespace LibraryManagement.Api.Controllers
     [ApiController]
     public class LoanController : ControllerBase
     {
+        private readonly int MAX_BORROW_COUNT = 5;
         readonly ILoanService _loanService;
         readonly IMapper _mapper;
         
@@ -28,6 +29,12 @@ namespace LibraryManagement.Api.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var loan = _mapper.Map<Loan>(loanRequest);
             loan.UserId = userId;
+
+            var loans = await _loanService.GetLoansByUser(userId);
+            if (loans.Count() > 5)
+            {
+              return BadRequest(new { message = $"Cannot borrow more than {MAX_BORROW_COUNT} books" });
+            }
 
             var addedLoan = await _loanService.AddLoan(loan);
             return Ok(addedLoan);
