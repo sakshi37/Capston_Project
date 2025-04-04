@@ -58,10 +58,16 @@
             <div *ngIf="expectedPayment !== null" class="mt-4">
               <p>
                 <strong>Expected Payment:</strong>
-                {{ expectedPayment }}
+                {{ expectedPayment | currency }}
               </p>
-              <p><strong>DiscountPerDay:</strong> {{ discount }}</p>
-              <p><strong>PenaltyPerDay:</strong> {{ penalty }}</p>
+              <p>
+                <strong>Discount (Early return):</strong>
+                {{ discount | currency }} per day
+              </p>
+              <p>
+                <strong>Penalty (Late return):</strong>
+                {{ penalty | currency }} per day
+              </p>
             </div>
 
             <div class="text-center mt-4">

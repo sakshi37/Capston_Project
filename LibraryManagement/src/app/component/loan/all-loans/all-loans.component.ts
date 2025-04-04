@@ -14,21 +14,30 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './all-loans.component.css',
 })
 export class AllLoansComponent implements OnInit {
-  loans: Loan[] = [];
+  loans: LoanWithPayment[] = [];
   loanService = inject(LoanService);
-  bookpaymentService = inject(BookPaymentService);
+  bookPaymentService = inject(BookPaymentService);
   router = inject(Router);
   route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.loanService.getUserLoans().subscribe((data) => {
       console.log(data);
-      this.loans = data;
+      this.loans = data.map((loan) => {
+        const paymentAmount = this.loanService.calculateCurrentPayment(
+          loan.borrowedAtPrice,
+          new Date(loan.endDate),
+          new Date(loan.startDate)
+        );
+        return { ...loan, paymentAmount };
+      });
+
+      console.log(this.loans);
     });
   }
 
   makePayment(loanId: number) {
-    this.bookpaymentService.bookPayment(loanId).subscribe((data) => {
+    this.bookPaymentService.bookPayment(loanId).subscribe((data) => {
       console.log(data);
       this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
         this.router.navigate([this.route.snapshot.url.join('/')]);
@@ -36,3 +45,7 @@ export class AllLoansComponent implements OnInit {
     });
   }
 }
+
+type LoanWithPayment = Loan & {
+  paymentAmount: number;
+};

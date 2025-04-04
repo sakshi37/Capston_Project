@@ -13,7 +13,7 @@ namespace LibraryManagement.Api.Controllers
     [ApiController]
     public class LoanController : ControllerBase
     {
-        private readonly int MAX_BORROW_COUNT = 20;
+        private readonly int MAX_BORROW_COUNT = 5;
         readonly ILoanService _loanService;
         readonly IMapper _mapper;
 
@@ -28,7 +28,6 @@ namespace LibraryManagement.Api.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var mappedLoan = _mapper.Map<Loan>(loanRequest);
-            Console.WriteLine("hellow orlddjewfkj");
             mappedLoan.UserId = userId;
 
             var loans = await _loanService.GetLoansByUser(userId);

@@ -11,13 +11,15 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Status</th>
+          <th>Payment Amt.</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let loan of loans">
           <td>{{ loan.id }}</td>
           <td>{{ loan.bookId }}</td>
-          <td>{{ loan.borrowedAtPrice | currency }}</td>
+          <td>{{ loan.borrowedAtPrice }}</td>
           <td>{{ loan.startDate | date : "mediumDate" }}</td>
           <td>{{ loan.endDate | date : "mediumDate" }}</td>
           <td>
@@ -28,7 +30,18 @@
               {{ loan.isReturn ? "Returned" : "Pending" }}
             </span>
           </td>
-          <td><button (click)="makePayment(loan.id)">Payemnt</button></td>
+          <td>
+            {{ loan.paymentAmount | currency }}
+          </td>
+          <td>
+            <button
+              (click)="makePayment(loan.id)"
+              [disabled]="loan.isReturn"
+              class="btn btn-primary btn-sm"
+            >
+              Payemnt
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>

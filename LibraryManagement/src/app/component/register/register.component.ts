@@ -22,21 +22,25 @@ export class RegisterComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onRegister() {
-    // if (this.password == this.confirmPassword) {
     this.authService
       .register(this.firstName, this.lastName, this.email, this.password)
       .subscribe({
-        next: () => {
+        next: (res) => {
           alert('Registration Successful!');
           this.router.navigate(['/login']);
         },
-        error: () => {
-          this.errorMessage = 'Registration failed!';
-          console.log(this.firstName, this.lastName, this.email, this.password);
+        error: (err) => {
+          if (err.status === 400 && err.error?.errors) {
+            this.errorMessage = err.error.errors[0];
+            alert(this.errorMessage); // Show user-friendly error
+          } else if (err.status === 200) {
+            alert('Registration Successful');
+            this.router.navigate(['/login']);
+          } else {
+            this.errorMessage = 'An unexpected error occurred.';
+            console.error(err);
+          }
         },
       });
-    // } else {
-    //   this.errorMessage = 'Password should be same in both fields';
-    // }
   }
 }
