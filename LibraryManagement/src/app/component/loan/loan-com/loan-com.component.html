@@ -27,7 +27,7 @@
 
             <p>
               <strong>Price:</strong>
-              {{ book?.price ?? "N/A" | currency }}
+              {{ book?.price ?? "N/A" }}
             </p>
 
             <strong>Published Date:</strong>
@@ -37,10 +37,38 @@
                 : "N/A"
             }}
 
+            <!-- Loan Calculation Form -->
+            <div class="mt-4">
+              <label for="returnDate">Select Return Date:</label>
+              <input
+                type="date"
+                id="returnDate"
+                class="form-control"
+                [(ngModel)]="returnDate"
+              />
+              <button
+                class="btn btn-primary mt-3 w-100"
+                (click)="calculateLoan()"
+              >
+                Calculate Payment
+              </button>
+            </div>
+
+            <!-- Calculation Results -->
+            <div *ngIf="expectedPayment !== null" class="mt-4">
+              <p>
+                <strong>Expected Payment:</strong>
+                {{ expectedPayment }}
+              </p>
+              <p><strong>DiscountPerDay:</strong> {{ discount }}</p>
+              <p><strong>PenaltyPerDay:</strong> {{ penalty }}</p>
+            </div>
+
             <div class="text-center mt-4">
               <button
                 class="btn btn-success btn-lg w-100 rounded-3"
                 [disabled]="!book"
+                (click)="confirmedLoan()"
               >
                 <i class="bi bi-check-circle"></i> Confirm Loan
               </button>
@@ -54,7 +82,7 @@
 
 <style>
   .loan-card {
-    background-color: #f5f7fa; /* ✅ Light blue-gray background */
+    background-color: #f5f7fa;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
 

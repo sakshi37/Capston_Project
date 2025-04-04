@@ -13,22 +13,21 @@ namespace LibraryManagement.Api.Controllers
     [ApiController]
     public class LoanController : ControllerBase
     {
-        private readonly int MAX_BORROW_COUNT = 5;
+        private readonly int MAX_BORROW_COUNT = 20;
         readonly ILoanService _loanService;
         readonly IMapper _mapper;
-        
+
         public LoanController(ILoanService iLoanService, IMapper mapper)
         {
             _mapper = mapper;
             _loanService = iLoanService;
         }
-        
+
         [HttpPost]
         public async Task<ActionResult<LoanResponseDto>> AddLoan([FromBody] LoanRequestDto loanRequest)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             var mappedLoan = _mapper.Map<Loan>(loanRequest);
-            
             mappedLoan.UserId = userId;
 
             var loans = await _loanService.GetLoansByUser(userId);
@@ -48,7 +47,7 @@ namespace LibraryManagement.Api.Controllers
             var addedLoan = await _loanService.AddLoan(mappedLoan);
             return Ok(addedLoan);
         }
-        
+
         [HttpGet]
         public async Task<IActionResult> GetLoansByUser()
         {

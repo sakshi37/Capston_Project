@@ -6,11 +6,13 @@ import {
 } from '../../../services/book-service.service';
 import { DatePipe, CurrencyPipe } from '@angular/common';
 import { CommonModule, NgIf } from '@angular/common';
-
+import { LoanService } from '../../../services/loan/loan.service';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-loan-com',
   standalone: true,
-  imports: [DatePipe, CurrencyPipe, NgIf, CommonModule],
+  imports: [DatePipe, CurrencyPipe, NgIf, CommonModule, FormsModule],
   templateUrl: './loan-com.component.html',
   styleUrl: './loan-com.component.css',
 })
@@ -20,9 +22,16 @@ export class LoanComComponent {
   formattedPublishedDate: Date | null = null;
   errorMessage: string | null = null;
   isLoading: boolean = true;
+  returnDate: string = '';
+  expectedPayment: number | null = null;
+  discount: number | null = null;
+  penalty: number | null = null;
+
   constructor(
     private route: ActivatedRoute,
-    private bookService: BookServiceService
+    private bookService: BookServiceService,
+    private loanService: LoanService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -39,5 +48,29 @@ export class LoanComComponent {
       this.isLoading = false;
     });
     console.log(this.bookId);
+
+    const price = 100;
+    const date = new Date('2025-04-13');
+    const cal = this.loanService.calculatePayment(price, date);
+    console.log(cal);
+  }
+
+  calculateLoan() {
+    if (!this.book || !this.returnDate) return;
+    const endDate = new Date(this.returnDate);
+    const result = this.loanService.calculatePayment(this.book.price, endDate);
+    this.expectedPayment = result.expectedPayment;
+    this.discount = result.discount;
+    this.penalty = result.penalty;
+  }
+
+  confirmedLoan() {
+    if (!this.book || !this.returnDate) return;
+    this.loanService
+      .loanRequest(this.book.id, this.returnDate + 'T00:00:00Z')
+      .subscribe((data) => {
+        console.log(data);
+        this.router.navigate(['/loans']);
+      });
   }
 }
