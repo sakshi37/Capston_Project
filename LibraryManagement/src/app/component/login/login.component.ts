@@ -21,10 +21,9 @@ export class LoginComponent {
   onLogin() {
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.accessToken);
-        // localStorage.setItem('email', res.email);
-        // alert('Hurray! Logged In Successfully!');
         console.log(res);
+
+        this.authService.setToken(res.accessToken);
         this.router.navigate(['/']);
       },
       error: () => {

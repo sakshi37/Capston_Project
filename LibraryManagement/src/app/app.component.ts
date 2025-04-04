@@ -1,27 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
-import { Router, RouterModule, RouterOutlet } from '@angular/router';
-
-import { RegisterComponent } from './component/register/register.component';
-import { GetAllBooksComponent } from './component/get-all-books/get-all-books.component';
-import { LoginComponent } from '../app/component/login/login.component';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    RouterModule,
-    RegisterComponent,
-    GetAllBooksComponent,
-    LoginComponent,
-    NgIf,
-  ],
+  imports: [RouterOutlet, RouterModule, NgIf],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'LibraryManagement';
+  authService = inject(AuthService);
   isAuthenticated = false;
+
+  ngOnInit() {
+    this.authService.authState$.subscribe((isAuthenticated) => {
+      this.isAuthenticated = isAuthenticated;
+    });
+  }
 }
