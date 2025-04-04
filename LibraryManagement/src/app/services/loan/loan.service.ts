@@ -17,15 +17,7 @@ export class LoanService {
     });
   }
 
-  calculatePayment(
-    bookPrice: number,
-    endDate: Date
-  ): {
-    expectedPayment: number;
-    discount: number;
-    penalty: number;
-  } {
-    const startDate = new Date();
+  calculatePayment(bookPrice: number, endDate: Date, startDate = new Date()) {
     startDate.setHours(0, 0, 0, 0);
 
     endDate.setHours(23, 59, 59, 999);
@@ -57,7 +49,21 @@ export class LoanService {
       expectedPayment: total,
       discount: discount,
       penalty: penalty,
+      diffDays: diff,
     };
+  }
+
+  calculateCurrentPayment(bookPrice: number, endDate: Date, startDate: Date) {
+    const { expectedPayment, discount, penalty, diffDays } =
+      this.calculatePayment(bookPrice, endDate, startDate);
+
+    if (diffDays > 0) {
+      const amount = expectedPayment - diffDays * discount;
+      return amount;
+    } else {
+      const amount = expectedPayment + Math.abs(diffDays) * penalty;
+      return amount;
+    }
   }
 }
 export type Loan = {
