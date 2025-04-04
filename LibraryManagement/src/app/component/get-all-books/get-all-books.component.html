@@ -12,6 +12,7 @@
             <strong>Published Date:</strong> {{ book.publishedDate | date }}
           </p>
           <a
+            *ngIf="authService.isAuthenticated()"
             [routerLink]="['/loan', book.id]"
             class="btn btn-light w-100 rounded-3"
           >

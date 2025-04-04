@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Book, BookServiceService } from '../../services/book-service.service';
 import { concatWith } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-get-all-books',
@@ -14,10 +15,9 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class GetAllBooksComponent {
   books: Book[] = [];
-  private bookService: BookServiceService;
-  constructor(bookService: BookServiceService) {
-    this.bookService = bookService;
-  }
+
+  private bookService = inject(BookServiceService);
+  authService = inject(AuthService);
 
   ngOnInit() {
     this.bookService.getBooks().subscribe((data) => {
