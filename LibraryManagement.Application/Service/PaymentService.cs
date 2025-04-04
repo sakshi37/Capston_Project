@@ -16,6 +16,7 @@ namespace LibraryManagement.Application.Service
 
         public async Task<Payment> AddPayment(Payment pay)
         {
+            await _loanService.Update(pay.LoanId);
 
             //startDate EndDate BookPrice 
             var loan = await _loanService.GetLoanById(pay.LoanId);

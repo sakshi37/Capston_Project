@@ -7,8 +7,10 @@ import { Injectable } from '@angular/core';
 export class BookPaymentService {
   constructor(private http: HttpClient) {}
 
-  bookPayment() {
-    return this.http.get<payment>('https://localhost:44321/api/Payment');
+  bookPayment(loanId: number) {
+    return this.http.post('https://localhost:44321/api/Payment', {
+      loanId: loanId,
+    });
   }
 }
 

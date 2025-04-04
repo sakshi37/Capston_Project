@@ -68,6 +68,7 @@
               <button
                 class="btn btn-success btn-lg w-100 rounded-3"
                 [disabled]="!book"
+                (click)="confirmedLoan()"
               >
                 <i class="bi bi-check-circle"></i> Confirm Loan
               </button>

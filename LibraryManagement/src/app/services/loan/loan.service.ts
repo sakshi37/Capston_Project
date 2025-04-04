@@ -10,6 +10,12 @@ export class LoanService {
   getUserLoans() {
     return this.http.get<Loan[]>('https://localhost:44321/api/Loan');
   }
+  loanRequest(bookId: number, date: string) {
+    return this.http.post<Loan>('https://localhost:44321/api/Loan', {
+      bookId: bookId,
+      endDate: date,
+    });
+  }
 
   calculatePayment(
     bookPrice: number,
@@ -22,10 +28,10 @@ export class LoanService {
     const startDate = new Date();
     startDate.setHours(0, 0, 0, 0);
 
-    endDate.setHours(23, 59, 59, 999); // Set end date to the end of the day
+    endDate.setHours(23, 59, 59, 999);
 
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); // Ensure current date is also at the start of the day
+    currentDate.setHours(0, 0, 0, 0);
 
     const days = Math.floor(
       (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)

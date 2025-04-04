@@ -28,6 +28,7 @@
               {{ loan.isReturn ? "Returned" : "Pending" }}
             </span>
           </td>
+          <td><button (click)="makePayment(loan.id)">Payemnt</button></td>
         </tr>
       </tbody>
     </table>

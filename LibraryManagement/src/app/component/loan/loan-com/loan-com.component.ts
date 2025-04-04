@@ -8,7 +8,7 @@ import { DatePipe, CurrencyPipe } from '@angular/common';
 import { CommonModule, NgIf } from '@angular/common';
 import { LoanService } from '../../../services/loan/loan.service';
 import { FormsModule } from '@angular/forms';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-loan-com',
   standalone: true,
@@ -30,7 +30,8 @@ export class LoanComComponent {
   constructor(
     private route: ActivatedRoute,
     private bookService: BookServiceService,
-    private loanService: LoanService
+    private loanService: LoanService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -61,5 +62,15 @@ export class LoanComComponent {
     this.expectedPayment = result.expectedPayment;
     this.discount = result.discount;
     this.penalty = result.penalty;
+  }
+
+  confirmedLoan() {
+    if (!this.book || !this.returnDate) return;
+    this.loanService
+      .loanRequest(this.book.id, this.returnDate + 'T00:00:00Z')
+      .subscribe((data) => {
+        console.log(data);
+        this.router.navigate(['/loans']);
+      });
   }
 }
