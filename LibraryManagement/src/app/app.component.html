@@ -17,21 +17,34 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/loans" routerLinkActive="active"
-            >Loans</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active"
-            >Login</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/register" routerLinkActive="active"
-            >Register</a
-          >
-        </li>
+
+        <!-- Show Login & Register if not authenticated -->
+        <ng-container *ngIf="!isAuthenticated; else loggedInTemplate">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active"
+              >Login</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active"
+              >Register</a
+            >
+          </li>
+        </ng-container>
+
+        <!-- Show Logout if authenticated -->
+        <ng-template #loggedInTemplate>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/loans" routerLinkActive="active"
+              >Loans</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" (click)="this.authService.logout()"
+              >Logout</a
+            >
+          </li>
+        </ng-template>
       </ul>
     </div>
   </div>
